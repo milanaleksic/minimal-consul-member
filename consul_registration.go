@@ -32,12 +32,12 @@ type agentServiceCheck struct {
 	TLSSkipVerify     bool   `json:",omitempty"`
 }
 
-func registerOnConsul(internalPort int, consulLocation string) (err error) {
+func registerOnConsul(internalPort int, consulLocation, applicationName string) (err error) {
 	if consulLocation == "" {
 		return
 	}
 	registration, err := json.Marshal(&agentServiceRegistration{
-		Name: "notes_for_life",
+		Name: applicationName,
 		Port: internalPort,
 		Checks: []*agentServiceCheck{
 			{
